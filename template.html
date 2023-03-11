@@ -5,14 +5,43 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        .user{
+            background-color: lightsalmon;
+            border-radius: 10px;
+            margin: 10px;
+            padding: 5px;
+            box-shadow: 5px;
+
+
+        }
+    </style>
 </head>
 <body>
-    <ul id="user-list">
+    <h2></h2>
+    <div id="user-container">
 
-    </ul>
+    </div>
+    
 
     <script>
-        
+        fetch('https://jsonplaceholder.typicode.com/users')
+      .then(res => res.json())
+      .then(data=>showUserName(data) )
+
+      function showUserName(data){
+        let userContainer = '';
+        data.forEach(user => {
+            userContainer = userContainer + `<div class="user">
+                <h2>${user.name}</h2>
+                <p>Email : ${user.email}</p>
+                <p>Company : ${user.company.name}.${user.company.catchPhrase}.${user.company.bs}</p>
+
+                </div>`;
+                const container= document.getElementById('user-container');
+                container.innerHTML=userContainer;
+        });
+      }
     </script>
     
 </body>
